@@ -70,6 +70,7 @@ public class Network {
             }
             User newUser = new User(name);
             users[n] = newUser;
+            userCount++;
             return true;
         }
         return false;
@@ -79,7 +80,6 @@ public class Network {
      *  If any of the two names is not a user in this network,
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
-        int index = 10;
         if(name1 == null || name2 == null || name1.equals(name2)){
             return false;
         }
@@ -92,11 +92,10 @@ public class Network {
         if (followees != null) {
         for (String followee : followees) {
             if (followee != null && followee.equals(name2)) {
-                return false; // User1 already follows User2
+                return false;
             }
         }
         }
-        // Attempt to add followee and return success/failure
     return user1.addFollowee(name2);
 }
     
