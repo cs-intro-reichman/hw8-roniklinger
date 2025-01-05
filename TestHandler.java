@@ -301,12 +301,12 @@ public class TestHandler {
         return this.tester.test("Alice, add 100 users, followee count is still 10", expected, actual);
     }
 
-    public boolean addFolloweeTest5(){
+public boolean addFolloweeTest5(){
         User alice = new User("Alice");
         String expected = "true";
         String actual = "";
         try {
-            actual += (alice.addFollowee("Foo") && alice.addFollowee("foo") && alice.getfCount() == 1 && alice.follows("Foo"));
+            actual += (alice.addFollowee("Foo") && !alice.addFollowee("foo") && alice.getfCount() == 1 && alice.follows("Foo"));
         } catch (Exception e) {
             actual = TesterMessagesEnum.ERROR + e.getMessage();
         }

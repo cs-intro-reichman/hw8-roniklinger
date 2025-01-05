@@ -33,8 +33,10 @@ public class Network {
         for(int i=0;i<users.length;i++){
             if(users[i] != null){
                 String userName = users[i].getName();
-                if((userName != null && userName.toLowerCase().equals(name.toLowerCase()))){
+                if(userName != null){
+                    if(userName.toLowerCase().equals(name.toLowerCase())){
                     return users[i];
+                    }
                 }
             }
         }
@@ -48,6 +50,9 @@ public class Network {
     public boolean addUser(String name) {
         if(users[users.length -1] != null){
             System.out.println("This network list is already full");
+            return false;
+        }
+        if(name == null){
             return false;
         }
         if(getUser(name) == null){
@@ -83,6 +88,7 @@ public class Network {
                 }
             }
         }
+        
         if(index < 10){
             users[index].addFollowee(name2);
             return true;
