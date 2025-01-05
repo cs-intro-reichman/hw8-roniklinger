@@ -33,7 +33,7 @@ public class Network {
         for(int i=0;i<users.length;i++){
             if(users[i] != null){
                 String userName = users[i].getName();
-                if(userName.equals(name)){
+                if((userName != null && userName.toLowerCase().equals(name.toLowerCase()))){
                     return users[i];
                 }
             }
@@ -72,7 +72,7 @@ public class Network {
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
         int index = 10;
-        if(getUser(name1) == null || getUser(name2) == null){
+        if(getUser(name1) == null || getUser(name2) == null || name1.equals(name2)){
             return false;
         }
         for(int i=0;i<users.length;i++){
@@ -177,7 +177,7 @@ public class Network {
         String ans = "";
         for(int i=0;i<users.length;i++){
             if(users[i] != null){
-                ans = ans + users[i] + " ";
+                ans = ans + users[i] + "\n";
             }
             
         }
