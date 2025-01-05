@@ -30,12 +30,15 @@ public class Network {
      *  If there is no such user, returns null.
      *  Notice that the method receives a String, and returns a User object. */
     public User getUser(String name) {
+        if (name == null){
+            return null;
+        }
         for(int i=0;i<users.length;i++){
             if(users[i] != null){
                 String userName = users[i].getName();
                 if(userName != null){
                     if(userName.toLowerCase().equals(name.toLowerCase())){
-                    return users[i];
+                        return users[i];
                     }
                 }
             }
@@ -77,26 +80,25 @@ public class Network {
      *  or if the "follows" addition failed for some reason, returns false. */
     public boolean addFollowee(String name1, String name2) {
         int index = 10;
-        if(getUser(name1) == null || getUser(name2) == null || name1.equals(name2)){
+        if(name1 == null || name2 == null || name1.equals(name2)){
             return false;
         }
-        for(int i=0;i<users.length;i++){
-            if(users[i] != null){
-                String userName = users[i].getName();
-                if(userName.equals(name1)){
-                    index = i;
-                }
+        User user1 = getUser(name1);
+        User user2 = getUser(name2);
+        if(user1 == null || user2 == null ){
+            return false;
+        }
+        String[] followees = user1.getfFollows();
+        if (followees != null) {
+        for (String followee : followees) {
+            if (followee != null && followee.equals(name2)) {
+                return false; // User1 already follows User2
             }
         }
-        
-        if(index < 10){
-            users[index].addFollowee(name2);
-            return true;
         }
-        else{
-            return false;
-        }
-    }
+        // Attempt to add followee and return success/failure
+    return user1.addFollowee(name2);
+}
     
     /** For the user with the given name, recommends another user to follow. The recommended user is
      *  the user that has the maximal mutual number of followees as the user with the given name. */
@@ -180,10 +182,10 @@ public class Network {
 
     // Returns a textual description of all the users in this network, and who they follow.
     public String toString() {
-        String ans = "";
+        String ans = "Network:";
         for(int i=0;i<users.length;i++){
             if(users[i] != null){
-                ans = ans + users[i] + "\n";
+                ans = ans + "\n" + users[i] ;
             }
             
         }
