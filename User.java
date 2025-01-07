@@ -44,7 +44,7 @@
 
     /** If this user follows the given name, returns true; otherwise returns false. */
     public boolean follows(String name) {
-        for(int i=0;i<this.follows.length;i++){
+        for(int i = 0;i < this.follows.length;i++){
             String tempName = this.follows[i];
             if(tempName != null && name != null){
                 if(tempName.toLowerCase().equals(name.toLowerCase())){
@@ -54,6 +54,7 @@
         }
         return false;
     }
+
     /** Makes this user follow the given name. If successful, returns true. 
      *  If this user already follows the given name, or if the follows list is full, does nothing and returns false; */
     public boolean addFollowee(String name) {
@@ -84,13 +85,13 @@
     public boolean removeFollowee(String name) {
         if(this.follows(name)){
             int count = 0;
-            while(count<this.follows.length){
+            while(count < this.follows.length){
                 if(this.follows[count].equals(name)){
                     break;
                 }
                 count++;
             }
-            for(int i=count;i<this.follows.length;i++){
+            for(int i = count;i < this.follows.length;i++){
                 if(i != maxfCount -1){
                     this.follows[i] = this.follows[i + 1];
                 }
@@ -108,7 +109,7 @@
     /*  Notice: This is the size of the intersection of the two follows lists. */
     public int countMutual(User other) {
         int count = 0;
-         for(int i=0;i<maxfCount;i++){
+         for(int i = 0;i < maxfCount;i++){
             String name = this.follows[i];
             if(other.follows(name)){
                 count++;
@@ -128,6 +129,7 @@
         }
         return false;
     }
+
     /** Returns this user's name, and the names that s/he follows. */
     public String toString() {
         String ans = name + " -> ";

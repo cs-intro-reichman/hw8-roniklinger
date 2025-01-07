@@ -33,7 +33,7 @@ public class Network {
         if (name == null){
             return null;
         }
-        for(int i=0;i<users.length;i++){
+        for(int i = 0;i < users.length;i++){
             if(users[i] != null){
                 String userName = users[i].getName();
                 if(userName != null){
@@ -90,14 +90,14 @@ public class Network {
         }
         String[] followees = user1.getfFollows();
         if (followees != null) {
-        for (String followee : followees) {
-            if (followee != null && followee.equals(name2)) {
-                return false;
+            for (int i = 0; i < followees.length; i++) {
+                if (followees[i] != null && followees.equals(name2)) {
+                    return false;
+                }
             }
         }
-        }
-    return user1.addFollowee(name2);
-}
+        return user1.addFollowee(name2);
+    }
     
     /** For the user with the given name, recommends another user to follow. The recommended user is
      *  the user that has the maximal mutual number of followees as the user with the given name. */
@@ -105,14 +105,14 @@ public class Network {
         User mostRecommendedUserToFollow = null;
         int maxFollows = 0;
         User userName = getUser(name);
-        for(int i=0;i<users.length;i++){
+        for(int i = 0;i < users.length;i++){
             if(users[i] != null){
                 if(users[i].getName().equals(name)){
                     continue;
                 }
                 else{
                     int count = 0;
-                    for(int j=0;j<users[i].getfFollows().length;j++){
+                    for(int j = 0;j < users[i].getfFollows().length;j++){
                         String tempName = users[i].getfFollows()[j];
                         if(userName.follows(tempName)){
                             count++;
@@ -133,7 +133,7 @@ public class Network {
     public String mostPopularUser() {
         String mostPopularUser = null;
         int maxFollowers = 0;
-        for(int i=0;i<users.length;i++){
+        for(int i = 0;i < users.length;i++){
             User candidate = users[i];
             if(candidate == null){
                 break;
@@ -169,7 +169,7 @@ public class Network {
      *  the users in this network. Note: A name can appear 0 or 1 times in each list. */
     private int followeeCount(String name) {
         int count = 0;
-        for(int i=0;i<users.length;i++){
+        for(int i = 0;i < users.length;i++){
             if(users[i] != null){
                 if(users[i].follows(name)){
                     count++;
@@ -182,7 +182,7 @@ public class Network {
     // Returns a textual description of all the users in this network, and who they follow.
     public String toString() {
         String ans = "Network:";
-        for(int i=0;i<users.length;i++){
+        for(int i = 0;i < users.length;i++){
             if(users[i] != null){
                 ans = ans + "\n" + users[i] ;
             }
